@@ -1,0 +1,18 @@
+File Path,Description
+app/__init__.py,Application factory and initialization
+app/models.py,Database models for feedback
+app/forms.py,WTForms for validation
+app/routes.py,Application routes/views
+app/templates/base.html,Base template
+app/templates/index.html,Home page
+app/templates/feedback_form.html,Feedback submission form
+app/templates/view_feedback.html,Display all feedback
+tests/__init__.py,Test package init
+tests/conftest.py,Pytest fixtures
+tests/test_routes.py,Route tests
+config.py,Configuration settings
+run.py,Application entry point
+requirements.txt,Python dependencies
+Procfile,Heroku deployment config
+runtime.txt,Python version specification
+README.md,Project documentation

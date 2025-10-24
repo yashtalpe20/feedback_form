@@ -1,0 +1,25 @@
+Category,File Name,Description,Lines of Code (approx)
+Core,config.py,Application configuration for dev/test/production,60
+Core,run.py,Application entry point,15
+Core,requirements.txt,Python dependencies,10
+App Package,app/__init__.py,Application factory pattern,40
+App Package,app/models.py,Database models (SQLAlchemy),45
+App Package,app/forms.py,WTForms validation,40
+App Package,app/routes.py,Application routes and views,80
+Templates,app/templates/base.html,Base HTML template with Bootstrap,130
+Templates,app/templates/index.html,Home page template,60
+Templates,app/templates/feedback_form.html,Feedback submission form,140
+Templates,app/templates/view_feedback.html,Display all feedback,120
+Tests,tests/__init__.py,Test package initialization,5
+Tests,tests/conftest.py,Pytest fixtures and configuration,40
+Tests,tests/test_routes.py,Comprehensive unit tests,220
+Tests,pytest.ini,Pytest configuration,10
+Deployment,Procfile,Heroku deployment configuration,1
+Deployment,runtime.txt,Python version specification,1
+Documentation,README.md,Complete project documentation,450
+Documentation,DEPLOYMENT_GUIDE.md,Comprehensive deployment guide,550
+Documentation,TESTING_GUIDE.md,Testing best practices guide,450
+Configuration,.env.example,Environment variables template,20
+Configuration,.gitignore,Git ignore patterns,60
+Alternatives,models_mongo.py,MongoDB models (PyMongo),50
+Alternatives,config_mongo.py,MongoDB configuration,10

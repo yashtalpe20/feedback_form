@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Feedback Collection System{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="display-4 mb-4">
+        <i class="fas fa-comments text-primary"></i>
+        Welcome to Feedback Collection System
+    </h1>
+    <p class="lead text-muted mb-4">
+        Your feedback matters! Help us improve by sharing your thoughts and experiences.
+    </p>
+
+    <div class="row mt-5">
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-pen-fancy fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Submit Feedback</h5>
+                    <p class="card-text">Share your thoughts and help us improve our services.</p>
+                    <a href="{{ url_for('main.submit_feedback') }}" class="btn btn-primary">
+                        Get Started <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-chart-bar fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">View Responses</h5>
+                    <p class="card-text">Browse through all the feedback we've received.</p>
+                    <a href="{{ url_for('main.view_feedback') }}" class="btn btn-success">
+                        View All <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-database fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Total Feedback</h5>
+                    <p class="card-text">We have collected feedback from our users.</p>
+                    <h2 class="text-primary">{{ feedback_count }}</h2>
+                    <small class="text-muted">responses collected</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-info mt-5" role="alert">
+        <i class="fas fa-info-circle"></i>
+        <strong>Note:</strong> All feedback is anonymous and will be used solely for improvement purposes.
+    </div>
+</div>
+{% endblock %}

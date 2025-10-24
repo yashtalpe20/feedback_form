@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}Submit Feedback{% endblock %}
+
+{% block extra_css %}
+<style>
+    .feedback-form {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 2px solid #e0e0e0;
+        padding: 12px;
+        transition: all 0.3s;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+    }
+
+    .invalid-feedback {
+        display: block;
+    }
+
+    .rating-stars {
+        display: flex;
+        gap: 10px;
+        font-size: 2rem;
+    }
+
+    .rating-stars i {
+        cursor: pointer;
+        color: #ddd;
+        transition: color 0.2s;
+    }
+
+    .rating-stars i.active, .rating-stars i:hover {
+        color: #ffc107;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="feedback-form">
+    <h2 class="text-center mb-4">
+        <i class="fas fa-paper-plane"></i> Submit Your Feedback
+    </h2>
+    <p class="text-center text-muted mb-5">
+        We value your opinion! Please share your thoughts with us.
+    </p>
+
+    <form method="POST" action="{{ url_for('main.submit_feedback') }}" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="mb-4">
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else "")) }}
+            {% if form.name.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-4">
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else "")) }}
+            {% if form.email.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-4">
+            {{ form.feedback_text.label(class="form-label") }}
+            {{ form.feedback_text(class="form-control" + (" is-invalid" if form.feedback_text.errors else "")) }}
+            {% if form.feedback_text.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.feedback_text.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <small class="text-muted">Minimum 10 characters, maximum 1000 characters</small>
+        </div>
+
+        <div class="mb-4">
+            {{ form.rating.label(class="form-label") }}
+            <div class="rating-stars" id="rating-stars">
+                <i class="far fa-star" data-rating="1"></i>
+                <i class="far fa-star" data-rating="2"></i>
+                <i class="far fa-star" data-rating="3"></i>
+                <i class="far fa-star" data-rating="4"></i>
+                <i class="far fa-star" data-rating="5"></i>
+            </div>
+            {{ form.rating(class="form-control d-none", id="rating-input") }}
+            {% if form.rating.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.rating.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="d-grid gap-2">
+            {{ form.submit(class="btn btn-primary btn-lg") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Star rating functionality
+    const stars = document.querySelectorAll('.rating-stars i');
+    const ratingInput = document.getElementById('rating-input');
+
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = parseInt(this.getAttribute('data-rating'));
+            ratingInput.value = rating;
+            updateStars(rating);
+        });
+
+        star.addEventListener('mouseover', function() {
+            const rating = parseInt(this.getAttribute('data-rating'));
+            updateStars(rating);
+        });
+    });
+
+    document.querySelector('.rating-stars').addEventListener('mouseleave', function() {
+        const currentRating = parseInt(ratingInput.value) || 0;
+        updateStars(currentRating);
+    });
+
+    function updateStars(rating) {
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.remove('far');
+                star.classList.add('fas', 'active');
+            } else {
+                star.classList.remove('fas', 'active');
+                star.classList.add('far');
+            }
+        });
+    }
+</script>
+{% endblock %}
